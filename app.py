@@ -12,11 +12,15 @@ users = {
 def index():
     return send_from_directory('.', 'index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/')
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    return send_from_directory('.', 'login.html')
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
 
         return redirect(url_for('dashboard'))
     else:
