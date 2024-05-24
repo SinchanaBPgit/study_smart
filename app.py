@@ -10,7 +10,7 @@ users = {
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return send_from_directory('.', 'index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -20,9 +20,9 @@ def login():
 
         return redirect(url_for('dashboard'))
     else:
-        return render_template('login.html')
+        return send_from_directory('.', 'login.html')
 
-    return render_template('login.html')
+    return send_from_directory('.', 'login.html')
 
 
 @app.route('/dashboard')
