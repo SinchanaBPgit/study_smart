@@ -9,7 +9,7 @@ users = {
 }
 
 @app.route('/')
-def index():
+def home():
     return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
