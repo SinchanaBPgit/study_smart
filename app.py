@@ -1,7 +1,7 @@
-from flask import Flask, send_from_directory, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory
 import os
 
-app = Flask(_name_, template_folder='.')
+app = Flask(__name__, template_folder='.')
 app.secret_key = os.urandom(24)
 users = {
     'user1': 'password1',
@@ -10,21 +10,21 @@ users = {
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
+    return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        # Check credentials here (add logic)
+        # Authentication logic goes here
         return redirect(url_for('dashboard'))
     else:
-        return send_from_directory('.', 'login.html')
+        return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
-    return send_from_directory('.', 'dashboard.html')
+    return render_template('dashboard.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -33,22 +33,22 @@ def register():
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
-        # Register the user here (add logic)
+        # Registration logic goes here
         return redirect(url_for('dashboard'))
     else:
-        return send_from_directory('.', 'register.html')
+        return render_template('register.html')
 
 @app.route('/courses.html')
 def courses():
-    return send_from_directory('.', 'courses.html')
+    return render_template('courses.html')
 
 @app.route('/contact.html', methods=['GET'])
 def contact():
-    return send_from_directory('.', 'contact.html')
+    return render_template('contact.html')
 
 @app.route('/contact.html', methods=['POST'])
 def contact_post():
-    # Handle form submission logic here
+    # Form submission logic goes here
     return redirect(url_for('courses'))
 
 @app.route('/logout.html')
@@ -58,11 +58,11 @@ def logout():
 
 @app.route('/enroll.html', methods=['GET'])
 def enroll():
-    return send_from_directory('.', 'enroll.html')
+    return render_template('enroll.html')
 
 @app.route('/enroll.html', methods=['POST'])
 def enroll_post():
-    # Handle enrollment logic here
+    # Enrollment logic goes here
     return redirect(url_for('dashboard'))
 
 @app.route('/style.css')
